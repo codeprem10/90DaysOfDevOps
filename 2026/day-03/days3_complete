@@ -1,0 +1,392 @@
+
+
+Today I focused on building my Linux command confidence as part of my DevOps learning journey.
+
+Instead of trying to memorize many commands, I learned a small set of commands that are useful for everyday Linux administration and troubleshooting.
+
+The commands are grouped into:
+
+Process Management
+File System
+Networking Troubleshooting
+
+I am practicing these commands on an Ubuntu Linux EC2 instance on AWS, connected through SSH using Git Bash.
+
+1. Process Management
+
+A process is a program that is currently running.
+
+Linux assigns every process a unique PID (Process ID).
+
+These commands help us view, search, and manage processes.
+
+ps
+ps
+
+Shows currently running processes and their PIDs.
+
+Example:
+
+PID   TTY       TIME     CMD
+1998  pts/0     00:00:00 bash
+2278  pts/0     00:00:00 ps
+
+Remember: ps gives us a snapshot of running processes.
+
+top
+top
+
+Displays running processes and system information such as:
+
+CPU usage
+Memory usage
+System load
+Process information
+
+Unlike ps, top continuously updates the information.
+
+Remember: top is useful for checking what is happening on the server right now.
+
+To exit top, press:
+
+q
+pgrep
+pgrep <process-name>
+
+Searches for a process by name and displays its PID.
+
+Example:
+
+pgrep systemd
+
+This returned several PIDs on my EC2 instance, including PID 1, which is the main systemd process.
+
+Remember: pgrep = find a process by name.
+
+kill
+kill <PID>
+
+Sends a signal to a process, commonly used to terminate it.
+
+For practice, I created a safe temporary process:
+
+sleep 300 &
+
+Then I found its PID and terminated it using:
+
+kill <PID>
+
+Important: Don't randomly kill system processes. Always make sure you know what process you're stopping.
+
+jobs
+jobs
+
+Shows background jobs started from the current shell.
+
+For example, when I ran:
+
+sleep 300 &
+
+the process was started in the background.
+
+Remember: jobs = see background jobs from the current terminal.
+
+2. File System Commands
+
+Linux organizes files and directories in a hierarchical filesystem.
+
+These commands help with navigating and managing files.
+
+pwd
+pwd
+
+Shows the current working directory.
+
+Example:
+
+/home/ubuntu
+
+Remember: pwd = Where am I?
+
+ls
+ls
+
+Lists files and directories in the current location.
+
+Remember: ls = What's here?
+
+cd
+cd <directory>
+
+Changes the current directory.
+
+Example:
+
+cd devops
+
+To go one directory back:
+
+cd ..
+
+Remember: cd = Move to another directory.
+
+mkdir
+mkdir <directory-name>
+
+Creates a new directory.
+
+Example:
+
+mkdir devops
+
+Remember: mkdir = Create a folder.
+
+touch
+touch <file-name>
+
+Creates an empty file.
+
+Example:
+
+touch linux-notes.md
+
+Remember: touch = Create a file.
+
+cp
+cp <source> <destination>
+
+Copies a file or directory.
+
+Example:
+
+cp file.txt backup.txt
+
+Remember: cp = Copy.
+
+mv
+mv <source> <destination>
+
+Moves a file or directory.
+
+It can also be used to rename files.
+
+Example:
+
+mv old.txt new.txt
+
+Remember: mv = Move or rename.
+
+rm
+rm <file>
+
+Removes/deletes a file.
+
+Example:
+
+rm old.txt
+
+Important: Be careful with rm because files normally don't go to a recycle bin.
+
+Remember: rm = Remove.
+
+cat
+cat <file>
+
+Displays the contents of a file.
+
+Example:
+
+cat notes.txt
+
+Remember: cat = Display file contents.
+
+less
+less <file>
+
+Allows you to read a file page by page.
+
+It is particularly useful for large files.
+
+Remember: less = Read a file comfortably.
+
+head
+head <file>
+
+Displays the beginning of a file.
+
+Remember: head = See the beginning.
+
+tail
+tail <file>
+
+Displays the end of a file.
+
+A very useful option for DevOps is:
+
+tail -f application.log
+
+This continuously displays new lines added to a log file.
+
+Remember: tail = See the end of a file.
+
+3. Networking Troubleshooting
+
+Networking is very important in DevOps because applications and servers constantly communicate with each other.
+
+Today I learned three basic networking commands.
+
+ping
+ping google.com
+
+Checks whether a host is reachable and measures the response time.
+
+Think:
+
+"Can I reach this server?"
+
+To stop ping, press:
+
+Ctrl + C
+
+Remember: ping = Check network reachability.
+
+ip addr
+ip addr
+
+Displays network interfaces and their IP addresses.
+
+On my EC2 instance, I saw interfaces such as:
+
+lo
+ens5
+lo
+
+lo is the loopback interface.
+
+Its address is:
+
+127.0.0.1
+
+This represents the local machine itself.
+
+ens5
+
+ens5 is the main network interface of my EC2 instance.
+
+It had the private IP:
+
+172.31.28.193
+
+Remember: ip addr = Show network interfaces and IP addresses.
+
+curl
+curl https://example.com
+
+Sends a request to a URL and displays the server's response.
+
+For example, it can be used to check:
+
+Whether a website is responding
+Whether an API is working
+Whether an HTTP service is reachable
+What response a server is returning
+
+A common DevOps example is:
+
+curl http://localhost:8080
+
+This can be used to test an application running locally on port 8080.
+
+Remember: curl = Communicate with and test web servers/APIs.
+
+Quick Cheat Sheet
+Process Management
+Command	Usage
+ps	Show running processes
+top	Monitor processes and system resources
+pgrep	Find a process by name
+kill	Send a signal to a process
+jobs	Show background jobs
+File System
+Command	Usage
+pwd	Show current directory
+ls	List files/directories
+cd	Change directory
+mkdir	Create directory
+touch	Create empty file
+cp	Copy files/directories
+mv	Move or rename
+rm	Delete files
+cat	Display file contents
+less	Read files page by page
+head	Show beginning of file
+tail	Show end of file
+Networking
+Command	Usage
+ping	Test network reachability
+ip addr	Show network interfaces and IP addresses
+curl	Test websites/APIs and make HTTP requests
+Total Commands Learned
+
+Today I learned 20 Linux commands:
+
+Process Management:
+ps
+top
+pgrep
+kill
+jobs
+
+File System:
+pwd
+ls
+cd
+mkdir
+touch
+cp
+mv
+rm
+cat
+less
+head
+tail
+
+Networking:
+ping
+ip addr
+curl
+Key Takeaways
+
+Today I learned that Linux commands are not just commands to memorize. Each command helps answer a practical question.
+
+Where am I?
+    → pwd
+
+What's here?
+    → ls
+
+How do I move?
+    → cd
+
+What processes are running?
+    → ps
+
+What's happening on the server?
+    → top
+
+What's the PID of a process?
+    → pgrep
+
+How do I stop a process?
+    → kill
+
+What is my IP address?
+    → ip addr
+
+Can I reach another server?
+    → ping
+
+Is my web server/API responding?
+    → curl
+
+These commands form a basic toolkit that I can continue building on throughout my Linux and DevOps jo
